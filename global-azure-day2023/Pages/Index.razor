@@ -58,8 +58,11 @@
 
     private async Task GetDevelopers()
     {        
-        List<Speaker> speakers = await Http.GetFromJsonAsync<List<Speaker>>("data/events.json");
-        //List<Speaker> speakers = await Http.GetFromJsonAsync<List<Speaker>>("/api/GetSpeakers");
+        
+        //List<Speaker> speakers = await Http.GetFromJsonAsync<List<Speaker>>("data/events.json");
+
+        // http://localhost:7044/api/GetSessions
+        List<Speaker> speakers = await Http.GetFromJsonAsync<List<Speaker>>("/api/GetSessions");
         SpeakerList = speakers.Shuffle<Speaker>().ToList();
     }
 }

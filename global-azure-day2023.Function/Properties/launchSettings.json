@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "global_azure_day2023.Function": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7044",
+      "launchBrowser": false
+    }
+  }
+}
