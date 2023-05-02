@@ -20,4 +20,10 @@
     <ProjectReference Include="..\global-azure-day2023.Model.Shared\global-azure-day2023.Model.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\data\events.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

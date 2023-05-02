@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using global_azure_day2023.Model.Shared.Extensions;
+@using global_azure_day2023.Model.Shared.Models;
+@inject HttpClient Http;
 
 <PageTitle>Index</PageTitle>
 
@@ -19,3 +22,44 @@
 
 
 <h2 style="color:blue;font-weight:bold;">Session Details</h2>
+<table class='table table-striped' aria-labelledby="tableLabel">
+    <thead>
+        <tr>
+            <th>Session Name</th>
+            <th>Speaker</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Slot</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var speaker in SpeakerList)
+        {
+            <tr>
+                <td>@speaker.SessionName</td>
+                <td>@speaker.SpeakerName</td>
+                <td>@speaker.EventDate.ToShortDateString()</td>
+                <td>@speaker.EventTime</td>
+                <td>@speaker.SlotName</td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code
+{
+    public List<Speaker> SpeakerList { get; set; } = new List<Speaker>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetDevelopers();
+    }
+
+    private async Task GetDevelopers()
+    {        
+        List<Speaker> speakers = await Http.GetFromJsonAsync<List<Speaker>>("data/events.json");
+        //List<Speaker> speakers = await Http.GetFromJsonAsync<List<Speaker>>("/api/GetSpeakers");
+        SpeakerList = speakers.Shuffle<Speaker>().ToList();
+    }
+}
